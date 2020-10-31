@@ -12,6 +12,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -27,13 +29,14 @@ import sudoku.SudokuSolverListener;
  *
  * @author hp
  */
-public class GUI implements MouseListener, KeyListener, SudokuSolverListener{
+public class GUI implements MouseListener, WindowListener, KeyListener, SudokuSolverListener{
     private Tile highlightedTile = null;
     private JFrame gui = new JFrame();;
     private Tile[][] board = new Tile[9][9];
     private SudokuSolver sudokuSolver = null;
             
     public GUI() {
+        gui.addWindowListener(this);
         gui.setLayout(new GridLayout(3,3));
         for(int subgridNumber = 0; subgridNumber < 9; subgridNumber++) {
             JPanel subgrid = new JPanel();
@@ -149,6 +152,35 @@ public class GUI implements MouseListener, KeyListener, SudokuSolverListener{
     @Override
     public void tileChanged(Location tileLocation, int newValue) {
         board[tileLocation.row][tileLocation.column].setNumber(newValue);
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
     }
 
 }
